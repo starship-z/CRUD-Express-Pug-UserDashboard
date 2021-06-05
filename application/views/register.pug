@@ -1,0 +1,14 @@
+extends layout
+
+block content
+  //- action, route POST /api/register
+      method = POST
+      enctype = "application/x-www-form-urlencoded"
+      this is for req.body access
+      let {username, password} = req.body
+   // 
+    
+  form(action="/api/register" method="POST" enctype="application/x-www-form-urlencoded")
+    input(type="text" name="username")
+    input(type="password" name="password")
+    button(type="submit") Register

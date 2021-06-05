@@ -1,26 +1,32 @@
 var express = require('express');
 var router = express.Router();
 
-/* GET home page. */
-// localhost:3000/api/ana
-router.get('/api/ana', function(req, res, next) {
-  res.send({status: true, name: "ana"})
-});
-
-router.post('/api/auth', function(req, res, next) {
-  let {username, password} = req.body;
-  if(authenticateUser(username, password)) {
-    //user authenticated
-  }else {
-    //user not autheticated
-  }
-  res.send({status: true, name: "ana"})
-});
-
-
 // localhost:3000/
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
+});
+
+// GET localhost:3000/home
+// localhost:3000/user/asd
+router.get('/login', function(req, res, next) {
+
+  res.render('login');
+
+});
+
+router.get('/register', function(req, res, next) {
+  
+  res.render('register');
+
+});
+
+router.get('/user/:user', function(req, res, next) {
+  let user = req.params.user
+  res.render('index', {name: user});
+});
+
+router.get('/home', function(req, res, next) {
+  res.render('index', {name: "ana nytochka"});
 });
 
 module.exports = router;

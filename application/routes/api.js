@@ -38,16 +38,19 @@ application/js
 */
 
 // register a user with a username and password
+// Client side rendering - send object back
+
+// Server side rendering - modify local storage / redirect
 router.post('/register', async function(req, res, next) {
     let {username, password} =  req.body;
     try {
       console.log("before")
       let user = await Users.register(username, password);
       console.log("after")
-      // console.log(user)
-      return res.send({status: true, user})
+      res.redirect("/login")
     } catch(err){
-      return res.send({status: false});
+      res.redirect("/register")
+      // return res.send({status: false});
     }
    
 });
@@ -103,10 +106,14 @@ router.post('/login', async function(req, res, next) {
   try{
     let [status, id] = await Users.authenticate(username, password);
     // res.locals.userid = id; 
-    return res.send({status: status, user: id});
+    if(status) {
+      res.redirect("/home");
+    } else{
+      res.redirect("/login")
+    }
   }catch(err){
     console.log(err);
-    return res.send({status: false});
+    res.redirect("/login")
   }
 });
 
