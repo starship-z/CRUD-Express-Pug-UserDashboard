@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
 
+const Users = require('../models/Users');
+
 // localhost:3000/
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
@@ -25,8 +27,15 @@ router.get('/user/:user', function(req, res, next) {
   res.render('index', {name: user});
 });
 
-router.get('/home', function(req, res, next) {
-  res.render('index', {name: "ana nytochka"});
+router.get('/home', async function(req, res, next) {
+  try{
+    let users1 = await Users.viewUsers();
+    res.render('home', {users: users1[0]});
+  }catch(err){
+    console.log(err);
+    res.send(err)
+    // ideally render error page
+  }
 });
 
 module.exports = router;
