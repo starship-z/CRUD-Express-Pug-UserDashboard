@@ -11,7 +11,6 @@ router.get('/', function(req, res, next) {
 // GET localhost:3000/home
 // localhost:3000/user/asd
 router.get('/login', function(req, res, next) {
-
   res.render('login');
 
 });
