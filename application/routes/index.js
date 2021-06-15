@@ -36,6 +36,6 @@ router.get('/home', async function(req, res, next) {
     // ideally render error page
   }
 });
-//comment
+//BS COMMENTS FOR DA PUSSHHHHH
 
 module.exports = router;
